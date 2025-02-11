@@ -1,24 +1,17 @@
+// editor.scss
 .cgb-floating-boxes-editor-preview {
-  border: 1px dotted #f00; // Puedes remover esto si no lo necesitas
-
-  .cgb-container {
-    position: relative;
-    width: 350px;
-    height: 600px;
-  }
+  border: 1px dotted #f00;
 
   .cgb-group {
     position: relative;
-    width: 350px;
-    height: 600px;
+    width: min(300px, 80%);
+    margin: 0 auto;
   }
 
   .cgb-floating-box {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: var(--box-width, 350px);
-    height: var(--box-height, 600px);
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
     overflow: hidden;
     display: flex;
@@ -27,49 +20,41 @@
     background-color: #4CAF50;
     z-index: 3;
     transition: all 0.3s ease;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 
   .cgb-floating-box.align-right {
-    left: calc(0 * var(--spacing, 20px)); // Alinear a la derecha, sin desplazamiento izquierdo
+    left: 0;
     right: unset;
   }
 
   .cgb-floating-box.align-left {
-    left: unset; // Alinear a la izquierda, sin desplazamiento derecho
-    right: calc(0 * var(--spacing, 20px));
+    left: unset;
+    right: 0;
   }
 
-  .cgb-floating-box.cgb-second.align-right {
+  .cgb-floating-box.cgb-second {
     background-color: #388E3C;
-    top: calc(-1 * var(--spacing, 20px));
-    left: calc(1 * var(--spacing, 20px)); // Compensa el desplazamiento derecho
+    transform: translateY(-10px) translateX(10px);
     z-index: 2;
   }
 
-  .cgb-floating-box.cgb-third.align-right {
+  .cgb-floating-box.cgb-third {
     background-color: #2E7D32;
-    top: calc(-2 * var(--spacing, 20px));
-    left: calc(2 * var(--spacing, 20px)); // Compensa el desplazamiento derecho
+    transform: translateY(-20px) translateX(20px);
     z-index: 1;
   }
 
   .cgb-floating-box.cgb-second.align-left {
-    background-color: #388E3C;
-    top: calc(-1 * var(--spacing, 20px));
-    right: calc(1 * var(--spacing, 20px)); // Compensa el desplazamiento izquierdo
-    z-index: 2;
+    transform: translateY(-10px) translateX(-10px);
   }
 
   .cgb-floating-box.cgb-third.align-left {
-    background-color: #2E7D32;
-    top: calc(-2 * var(--spacing, 20px));
-    right: calc(2 * var(--spacing, 20px)); // Compensa el desplazamiento izquierdo
-    z-index: 1;
-  }
-
-  .cgb-floating-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    transform: translateY(-20px) translateX(-20px);
   }
 }

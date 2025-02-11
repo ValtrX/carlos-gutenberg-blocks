@@ -27,9 +27,21 @@
 				}
 			}
 		},
+		"boxSize": {
+			"type": "number",
+			"default": 30
+		},
+		"mobileBoxSize": {
+			"type": "number",
+			"default": 80
+		},
 		"alignRight": {
 			"type": "boolean",
 			"default": false
+		},
+		"aspectRatio": {
+			"type": "string",
+			"default": "1:1"
 		}
 	},
 	"textdomain": "carlos-gutenberg-blocks",
