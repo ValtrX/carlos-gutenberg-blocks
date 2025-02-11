@@ -1,24 +1,50 @@
-/**
- * React hook that is used to mark the block wrapper element.
- * It provides all the necessary props like the class name.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/packages/packages-block-editor/#useblockprops
- */
-import { useBlockProps } from '@wordpress/block-editor';
+import { useBlockProps } from "@wordpress/block-editor";
 
-/**
- * The save function defines the way in which the different attributes should
- * be combined into the final markup, which is then serialized by the block
- * editor into `post_content`.
- *
- * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-edit-save/#save
- *
- * @return {Element} Element to render.
- */
-export default function save() {
+export default function save({ attributes }) {
+	const {
+		images = [],
+		alignRight,
+		boxSize = 30,
+		mobileBoxSize = 80,
+		aspectRatio = "1:1",
+	} = attributes;
+
 	return (
-		<p { ...useBlockProps.save() }>
-			{ 'Carlos Gutenberg Blocks – hello from the saved content!' }
-		</p>
+		<div {...useBlockProps.save()}>
+			<div className="cgb-floating-boxes">
+				<div
+					className="cgb-group"
+					style={{
+						"--box-size": `${boxSize}vw`,
+						"--mobile-box-size": `${mobileBoxSize}vw`,
+						"--aspect-ratio": aspectRatio.replace(":", "/"),
+					}}
+				>
+					{images.slice(0, 3).map((image, index) => {
+						const baseClassName = "cgb-floating-box";
+						const positionClassName =
+							index === 1 ? "cgb-second" : index === 2 ? "cgb-third" : "";
+						const alignmentClassName = alignRight
+							? "align-right"
+							: "align-left";
+						const className = `${baseClassName} ${positionClassName} ${alignmentClassName}`;
+
+						return (
+							<div
+								key={index}
+								className={className}
+								style={{
+									"--box-size": `${boxSize}vw`,
+									"--mobile-box-size": `${mobileBoxSize}vw`,
+								}}
+								aria-label={`Floating box ${index + 1}`}
+							>
+								<img src={image.url} alt={`Imagen ${index + 1}`} />
+							</div>
+						);
+					})}
+				</div>
+			</div>
+		</div>
 	);
 }

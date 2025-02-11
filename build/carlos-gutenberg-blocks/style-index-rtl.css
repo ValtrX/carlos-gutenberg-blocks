@@ -1,13 +1,80 @@
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/carlos-gutenberg-blocks/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
-/**
- * The following styles get applied both on the front of your site
- * and in the editor.
- *
- * Replace them with your own styles or remove the file completely.
- */
-.wp-block-create-block-carlos-gutenberg-blocks {
-  color: #fff;
-  padding: 2px;
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-group {
+  position: relative;
+  width: var(--box-size, 30vw);
+  aspect-ratio: var(--aspect-ratio, 1/1);
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .wp-block-create-block-carlos-gutenberg-blocks .cgb-group {
+    width: var(--mobile-box-size, 80vw);
+  }
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 3;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.align-right {
+  right: 0;
+  left: unset;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-second.align-right {
+  transform: translateY(-10px) translateX(-10px);
+  z-index: 2;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-third.align-right {
+  transform: translateY(-20px) translateX(-20px);
+  z-index: 1;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.align-left {
+  right: unset;
+  left: 0;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-second.align-left {
+  transform: translateY(-10px) translateX(10px);
+  z-index: 2;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-third.align-left {
+  transform: translateY(-20px) translateX(20px);
+  z-index: 1;
+}
+@media (hover: hover) {
+  .wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-second:hover {
+    transform: translateY(-15px) translateX(-10px);
+  }
+  .wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-second:hover.align-left {
+    transform: translateY(-15px) translateX(10px);
+  }
+  .wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-third:hover {
+    transform: translateY(-25px) translateX(-20px);
+  }
+  .wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-box.cgb-third:hover.align-left {
+    transform: translateY(-25px) translateX(20px);
+  }
 }
