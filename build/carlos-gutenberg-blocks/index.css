@@ -1,0 +1,77 @@
+/*!****************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/carlos-gutenberg-blocks/editor.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************/
+.cgb-floating-boxes-editor {
+  border: 1px dotted #f00;
+  padding: 20px;
+}
+.cgb-floating-boxes-editor .cgb-group {
+  position: relative;
+  width: min(300px, 80%);
+  margin: 0 auto;
+  min-height: 300px;
+  aspect-ratio: var(--aspect-ratio, 1/1);
+}
+.cgb-floating-boxes-editor .image-preview-panel {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+.cgb-floating-boxes-editor .image-preview-panel img {
+  width: 50px;
+  height: 50px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.cgb-floating-boxes-editor .cgb-floating-box {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 3;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  top: 0;
+}
+.cgb-floating-boxes-editor .cgb-floating-box img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.align-right {
+  left: 0;
+  right: auto;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.align-left {
+  right: 0;
+  left: auto;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.cgb-second {
+  top: 10px;
+  z-index: 2;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.cgb-second.align-right {
+  left: 10px;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.cgb-second.align-left {
+  right: 10px;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.cgb-third {
+  top: 20px;
+  z-index: 1;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.cgb-third.align-right {
+  left: 20px;
+}
+.cgb-floating-boxes-editor .cgb-floating-box.cgb-third.align-left {
+  right: 20px;
+}
+
+/*# sourceMappingURL=index.css.map*/

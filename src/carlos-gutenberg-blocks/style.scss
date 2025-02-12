@@ -1,10 +1,14 @@
-// style.scss
-.wp-block-create-block-carlos-gutenberg-blocks {
-	.cgb-floating-boxes {
-			position: relative;
-			width: 100%;
-			margin: 0 auto;
-	}
+.cgb-floating-boxes-frontend {
+	// Variables CSS para animaciones
+	--slide-up-duration: 1s;
+	--float-cycle-duration: var(--cycle-duration, 3s);
+	--float-duration: var(--total-duration, 18s);
+	--slide-up-out-duration: 1s;
+	--float-delay: 2s;
+
+	position: relative;
+	width: 100%;
+	margin: 0 auto;
 
 	.cgb-group {
 			position: relative;
@@ -26,9 +30,10 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			transition: all 0.3s ease;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 			z-index: 3;
+			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+			opacity: 0;
+			visibility: hidden;
 
 			img {
 					width: 100%;
@@ -36,60 +41,61 @@
 					object-fit: cover;
 			}
 
-			// Alineación derecha
+			// Alineación
 			&.align-right {
 					left: 0;
 					right: unset;
 			}
 
-			&.cgb-second.align-right {
-					transform: translateY(-10px) translateX(10px);
-					z-index: 2;
-			}
-
-			&.cgb-third.align-right {
-					transform: translateY(-20px) translateX(20px);
-					z-index: 1;
-			}
-
-			// Alineación izquierda
 			&.align-left {
 					left: unset;
 					right: 0;
 			}
 
-			&.cgb-second.align-left {
-					transform: translateY(-10px) translateX(-10px);
+			// Animaciones
+			&.animate {
+					animation: 
+							slideUp var(--slide-up-duration) ease-in-out forwards,
+							float var(--float-cycle-duration) linear calc(var(--slide-up-duration) + var(--float-delay)) infinite;
+			}
+
+			&.cgb-second.animate {
+					animation: 
+							slideUp calc(var(--slide-up-duration) * 1.4) ease-in-out 0.4s forwards,
+							float var(--float-cycle-duration) linear calc(var(--slide-up-duration) * 1.4 + var(--float-delay)) infinite;
 					z-index: 2;
 			}
 
-			&.cgb-third.align-left {
-					transform: translateY(-20px) translateX(-20px);
+			&.cgb-third.animate {
+					animation: 
+							slideUp calc(var(--slide-up-duration) * 1.8) ease-in-out 0.8s forwards,
+							float var(--float-cycle-duration) linear calc(var(--slide-up-duration) * 1.8 + var(--float-delay)) infinite;
 					z-index: 1;
 			}
+	}
 
-			// Efecto hover para el frontend
-			@media (hover: hover) {
-					&:hover {
-							transform: translateY(-5px);
-							box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-					}
-
-					&.cgb-second:hover {
-							transform: translateY(-15px) translateX(10px);
-							
-							&.align-left {
-									transform: translateY(-15px) translateX(-10px);
-							}
-					}
-
-					&.cgb-third:hover {
-							transform: translateY(-25px) translateX(20px);
-							
-							&.align-left {
-									transform: translateY(-25px) translateX(-20px);
-							}
-					}
+	// Keyframes para las animaciones
+	@keyframes slideUp {
+			0% { 
+					transform: translateY(150%); 
+					opacity: 0; 
+					visibility: visible; 
 			}
+			100% { 
+					transform: translateY(0); 
+					opacity: 1; 
+					visibility: visible; 
+			}
+	}
+
+	@keyframes float {
+			0%, 25% { transform: translateY(0); }
+			12.5% { transform: translateY(-10px); }
+			37.5% { transform: translateY(10px); }
+			50% { transform: translateY(0); }
+			62.5% { transform: translateY(-15px); }
+			75% { transform: translateY(0); }
+			87.5% { transform: translateY(15px); }
+			100% { transform: translateY(0); }
 	}
 }

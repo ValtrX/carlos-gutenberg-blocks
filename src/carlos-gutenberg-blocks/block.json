@@ -44,6 +44,18 @@
 		"aspectRatio": {
 			"type": "string",
 			"default": "1:1"
+		},
+		"floatDuration": {
+			"type": "number",
+			"default": 18
+		},
+		"cycleDuration": {
+			"type": "number",
+			"default": 6
+		},
+		"spacing": {
+			"type": "number",
+			"default": 20
 		}
 	},
 	"textdomain": "carlos-gutenberg-blocks",
