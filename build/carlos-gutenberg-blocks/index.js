@@ -20,7 +20,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "react/jsx-runtime");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__);
-// edit.js
 
 
 
@@ -50,6 +49,9 @@ function Edit({
     aspectRatio = "1:1",
     floatDuration = 18,
     cycleDuration = 3,
+    floatDelay = 2,
+    slideUpDuration = 1,
+    slideOutDuration = 1,
     spacing = 20
   } = attributes;
   const onSelectImages = newImages => {
@@ -92,6 +94,17 @@ function Edit({
           max: 100,
           initialPosition: 80,
           __nextHasNoMarginBottom: true
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box Spacing (px)", "carlos-gutenberg-blocks"),
+          value: spacing,
+          onChange: value => setAttributes({
+            spacing: value
+          }),
+          min: 10,
+          max: 50,
+          initialPosition: 20,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Space between floating boxes", "carlos-gutenberg-blocks"),
+          __nextHasNoMarginBottom: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Align Right", "carlos-gutenberg-blocks"),
           checked: alignRight,
@@ -128,9 +141,9 @@ function Edit({
           }, index))
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Animation Settings", "carlos-gutenberg-blocks"),
+        title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Animation Timing Settings", "carlos-gutenberg-blocks"),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Float Duration (seconds)", "carlos-gutenberg-blocks"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Total Float Duration (seconds)", "carlos-gutenberg-blocks"),
           value: floatDuration,
           onChange: value => setAttributes({
             floatDuration: value
@@ -138,9 +151,10 @@ function Edit({
           min: 5,
           max: 30,
           initialPosition: 18,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How long the boxes will float before sliding out", "carlos-gutenberg-blocks"),
           __nextHasNoMarginBottom: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Cycle Duration (seconds)", "carlos-gutenberg-blocks"),
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Float Cycle Speed (seconds)", "carlos-gutenberg-blocks"),
           value: cycleDuration,
           onChange: value => setAttributes({
             cycleDuration: value
@@ -148,16 +162,42 @@ function Edit({
           min: 1,
           max: 10,
           initialPosition: 3,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Duration of each float up/down cycle", "carlos-gutenberg-blocks"),
           __nextHasNoMarginBottom: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Spacing (px)", "carlos-gutenberg-blocks"),
-          value: spacing,
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Initial Delay (seconds)", "carlos-gutenberg-blocks"),
+          value: floatDelay,
           onChange: value => setAttributes({
-            spacing: value
+            floatDelay: value
           }),
-          min: 10,
-          max: 50,
-          initialPosition: 20,
+          min: 0,
+          max: 5,
+          initialPosition: 2,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Delay before floating starts", "carlos-gutenberg-blocks"),
+          __nextHasNoMarginBottom: true
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide In Duration (seconds)", "carlos-gutenberg-blocks"),
+          value: slideUpDuration,
+          onChange: value => setAttributes({
+            slideUpDuration: value
+          }),
+          min: 0.5,
+          max: 3,
+          step: 0.1,
+          initialPosition: 1,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How fast the boxes slide in", "carlos-gutenberg-blocks"),
+          __nextHasNoMarginBottom: true
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Slide Out Duration (seconds)", "carlos-gutenberg-blocks"),
+          value: slideOutDuration,
+          onChange: value => setAttributes({
+            slideOutDuration: value
+          }),
+          min: 0.5,
+          max: 3,
+          step: 0.1,
+          initialPosition: 1,
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("How fast the boxes slide out", "carlos-gutenberg-blocks"),
           __nextHasNoMarginBottom: true
         })]
       })]
@@ -275,12 +315,18 @@ function save({
     aspectRatio = "1:1",
     floatDuration = 18,
     cycleDuration = 3,
+    floatDelay = 2,
+    slideUpDuration = 1,
+    slideOutDuration = 1,
     spacing = 20
   } = attributes;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
     "data-float-duration": floatDuration,
     "data-cycle-duration": cycleDuration,
+    "data-float-delay": floatDelay,
+    "data-slide-up-duration": slideUpDuration,
+    "data-slide-out-duration": slideOutDuration,
     "data-spacing": spacing,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "cgb-floating-boxes-frontend",
@@ -290,8 +336,15 @@ function save({
           "--box-size": `${boxSize}vw`,
           "--mobile-box-size": `${mobileBoxSize}vw`,
           "--aspect-ratio": aspectRatio.replace(":", "/"),
-          "--spacing": `${spacing}px`
+          "--spacing": `${spacing}px`,
+          "--float-duration": `${floatDuration}s`,
+          "--float-cycle-duration": `${cycleDuration}s`,
+          // Cambiado para coincidir con el CSS
+          "--float-delay": `${floatDelay}s`,
+          "--slide-up-duration": `${slideUpDuration}s`,
+          "--slide-out-duration": `${slideOutDuration}s`
         },
+        ß: true,
         children: images.slice(0, 3).map((image, index) => {
           const baseClassName = "cgb-floating-box";
           const positionClassName = index === 1 ? "cgb-second" : index === 2 ? "cgb-third" : "";
@@ -393,7 +446,7 @@ module.exports = window["wp"]["i18n"];
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/carlos-gutenberg-blocks","version":"0.1.0","title":"Carlos Gutenberg Blocks","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"images":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number"},"url":{"type":"string"}}}},"boxSize":{"type":"number","default":30},"mobileBoxSize":{"type":"number","default":80},"alignRight":{"type":"boolean","default":false},"aspectRatio":{"type":"string","default":"1:1"},"floatDuration":{"type":"number","default":18},"cycleDuration":{"type":"number","default":6},"spacing":{"type":"number","default":20}},"textdomain":"carlos-gutenberg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/carlos-gutenberg-blocks","version":"0.1.0","title":"Carlos Gutenberg Blocks","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"images":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number"},"url":{"type":"string"}}}},"boxSize":{"type":"number","default":30},"mobileBoxSize":{"type":"number","default":80},"alignRight":{"type":"boolean","default":false},"aspectRatio":{"type":"string","default":"1:1"},"floatDuration":{"type":"number","default":18},"cycleDuration":{"type":"number","default":6},"spacing":{"type":"number","default":20},"floatDelay":{"type":"number","default":2},"slideUpDuration":{"type":"number","default":1},"slideOutDuration":{"type":"number","default":1}},"textdomain":"carlos-gutenberg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 
