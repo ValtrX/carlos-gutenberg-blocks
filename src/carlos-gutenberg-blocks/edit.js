@@ -44,29 +44,40 @@ export default function Edit({ attributes, setAttributes }) {
 		<>
 			<InspectorControls>
 				<PanelBody title={__("Images Settings", "carlos-gutenberg-blocks")}>
+				<ToggleControl
+        label={__("Automatic Sizing", "carlos-gutenberg-blocks")}
+        checked={attributes.automaticSizing}
+        onChange={() => setAttributes({ automaticSizing: !attributes.automaticSizing })}
+        help={__("Adjust boxes to fit parent container", "carlos-gutenberg-blocks")}
+        __nextHasNoMarginBottom
+    />
+    {!attributes.automaticSizing && (
+        <>
+            <RangeControl
+                label={__("Desktop Size", "carlos-gutenberg-blocks")}
+                value={boxSize}
+                onChange={(value) => setAttributes({ boxSize: value })}
+                min={10}
+                max={90}
+                initialPosition={30}
+                __nextHasNoMarginBottom
+            />
+            <RangeControl
+                label={__("Mobile Size", "carlos-gutenberg-blocks")}
+                value={mobileBoxSize}
+                onChange={(value) => setAttributes({ mobileBoxSize: value })}
+                min={30}
+                max={100}
+                initialPosition={80}
+                __nextHasNoMarginBottom
+            />
+        </>
+    )}
 					<SelectControl
 						label={__("Aspect Ratio", "carlos-gutenberg-blocks")}
 						value={aspectRatio}
 						options={ASPECT_RATIOS}
 						onChange={(value) => setAttributes({ aspectRatio: value })}
-						__nextHasNoMarginBottom
-					/>
-					<RangeControl
-						label={__("Desktop Size", "carlos-gutenberg-blocks")}
-						value={boxSize}
-						onChange={(value) => setAttributes({ boxSize: value })}
-						min={10}
-						max={90}
-						initialPosition={30}
-						__nextHasNoMarginBottom
-					/>
-					<RangeControl
-						label={__("Mobile Size", "carlos-gutenberg-blocks")}
-						value={mobileBoxSize}
-						onChange={(value) => setAttributes({ mobileBoxSize: value })}
-						min={30}
-						max={100}
-						initialPosition={80}
 						__nextHasNoMarginBottom
 					/>
 					<RangeControl

@@ -66,33 +66,43 @@ function Edit({
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Images Settings", "carlos-gutenberg-blocks"),
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatic Sizing", "carlos-gutenberg-blocks"),
+          checked: attributes.automaticSizing,
+          onChange: () => setAttributes({
+            automaticSizing: !attributes.automaticSizing
+          }),
+          help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Adjust boxes to fit parent container", "carlos-gutenberg-blocks"),
+          __nextHasNoMarginBottom: true
+        }), !attributes.automaticSizing && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Desktop Size", "carlos-gutenberg-blocks"),
+            value: boxSize,
+            onChange: value => setAttributes({
+              boxSize: value
+            }),
+            min: 10,
+            max: 90,
+            initialPosition: 30,
+            __nextHasNoMarginBottom: true
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+            label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile Size", "carlos-gutenberg-blocks"),
+            value: mobileBoxSize,
+            onChange: value => setAttributes({
+              mobileBoxSize: value
+            }),
+            min: 30,
+            max: 100,
+            initialPosition: 80,
+            __nextHasNoMarginBottom: true
+          })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Aspect Ratio", "carlos-gutenberg-blocks"),
           value: aspectRatio,
           options: ASPECT_RATIOS,
           onChange: value => setAttributes({
             aspectRatio: value
           }),
-          __nextHasNoMarginBottom: true
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Desktop Size", "carlos-gutenberg-blocks"),
-          value: boxSize,
-          onChange: value => setAttributes({
-            boxSize: value
-          }),
-          min: 10,
-          max: 90,
-          initialPosition: 30,
-          __nextHasNoMarginBottom: true
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-          label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Mobile Size", "carlos-gutenberg-blocks"),
-          value: mobileBoxSize,
-          onChange: value => setAttributes({
-            mobileBoxSize: value
-          }),
-          min: 30,
-          max: 100,
-          initialPosition: 80,
           __nextHasNoMarginBottom: true
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Box Spacing (px)", "carlos-gutenberg-blocks"),
@@ -318,7 +328,8 @@ function save({
     floatDelay = 2,
     slideUpDuration = 1,
     slideOutDuration = 1,
-    spacing = 20
+    spacing = 20,
+    automaticSizing = false
   } = attributes;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
@@ -328,23 +339,26 @@ function save({
     "data-slide-up-duration": slideUpDuration,
     "data-slide-out-duration": slideOutDuration,
     "data-spacing": spacing,
+    "data-automatic-sizing": automaticSizing,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "cgb-floating-boxes-frontend",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        className: "cgb-group",
+        className: `cgb-group ${automaticSizing ? "automatic-sizing" : ""}`,
         style: {
-          "--box-size": `${boxSize}vw`,
-          "--mobile-box-size": `${mobileBoxSize}vw`,
-          "--aspect-ratio": aspectRatio.replace(":", "/"),
+          ...(automaticSizing ? {
+            width: "100%"
+          } : {
+            "--box-size": `${boxSize}vw`,
+            "--mobile-box-size": `${mobileBoxSize}vw`,
+            "--aspect-ratio": aspectRatio.replace(":", "/")
+          }),
           "--spacing": `${spacing}px`,
           "--float-duration": `${floatDuration}s`,
           "--float-cycle-duration": `${cycleDuration}s`,
-          // Cambiado para coincidir con el CSS
           "--float-delay": `${floatDelay}s`,
           "--slide-up-duration": `${slideUpDuration}s`,
           "--slide-out-duration": `${slideOutDuration}s`
         },
-        ß: true,
         children: images.slice(0, 3).map((image, index) => {
           const baseClassName = "cgb-floating-box";
           const positionClassName = index === 1 ? "cgb-second" : index === 2 ? "cgb-third" : "";
@@ -446,7 +460,7 @@ module.exports = window["wp"]["i18n"];
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/carlos-gutenberg-blocks","version":"0.1.0","title":"Carlos Gutenberg Blocks","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"images":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number"},"url":{"type":"string"}}}},"boxSize":{"type":"number","default":30},"mobileBoxSize":{"type":"number","default":80},"alignRight":{"type":"boolean","default":false},"aspectRatio":{"type":"string","default":"1:1"},"floatDuration":{"type":"number","default":18},"cycleDuration":{"type":"number","default":6},"spacing":{"type":"number","default":20},"floatDelay":{"type":"number","default":2},"slideUpDuration":{"type":"number","default":1},"slideOutDuration":{"type":"number","default":1}},"textdomain":"carlos-gutenberg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"create-block/carlos-gutenberg-blocks","version":"0.1.0","title":"Carlos Gutenberg Blocks","category":"widgets","icon":"smiley","description":"Example block scaffolded with Create Block tool.","example":{},"supports":{"html":false,"align":["wide","full"],"spacing":{"margin":true,"padding":true}},"attributes":{"images":{"type":"array","default":[],"items":{"type":"object","properties":{"id":{"type":"number"},"url":{"type":"string"}}}},"boxSize":{"type":"number","default":30},"mobileBoxSize":{"type":"number","default":80},"alignRight":{"type":"boolean","default":false},"aspectRatio":{"type":"string","default":"1:1"},"floatDuration":{"type":"number","default":18},"cycleDuration":{"type":"number","default":6},"spacing":{"type":"number","default":20},"floatDelay":{"type":"number","default":2},"slideUpDuration":{"type":"number","default":1},"slideOutDuration":{"type":"number","default":1},"automaticSizing":{"type":"boolean","default":false}},"textdomain":"carlos-gutenberg-blocks","editorScript":"file:./index.js","editorStyle":"file:./index.css","style":"file:./style-index.css","viewScript":"file:./view.js"}');
 
 /***/ })
 

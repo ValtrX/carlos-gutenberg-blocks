@@ -68,7 +68,10 @@
 		"slideOutDuration": {
 			"type": "number",
 			"default": 1
-		}
+		},
+		"automaticSizing": {
+			"type": "boolean",
+			"default": false}
 	},
 	"textdomain": "carlos-gutenberg-blocks",
 	"editorScript": "file:./index.js",

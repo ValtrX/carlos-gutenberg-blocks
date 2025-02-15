@@ -13,6 +13,7 @@ export default function save({ attributes }) {
 		slideUpDuration = 1,
 		slideOutDuration = 1,
 		spacing = 20,
+		automaticSizing = false,
 	} = attributes;
 
 	return (
@@ -24,21 +25,26 @@ export default function save({ attributes }) {
 			data-slide-up-duration={slideUpDuration}
 			data-slide-out-duration={slideOutDuration}
 			data-spacing={spacing}
+			data-automatic-sizing={automaticSizing}
 		>
 			<div className="cgb-floating-boxes-frontend">
 				<div
-					className="cgb-group"
+					className={`cgb-group ${automaticSizing ? "automatic-sizing" : ""}`}
 					style={{
-						"--box-size": `${boxSize}vw`,
-						"--mobile-box-size": `${mobileBoxSize}vw`,
-						"--aspect-ratio": aspectRatio.replace(":", "/"),
+						...(automaticSizing
+							? { width: "100%" }
+							: {
+									"--box-size": `${boxSize}vw`,
+									"--mobile-box-size": `${mobileBoxSize}vw`,
+									"--aspect-ratio": aspectRatio.replace(":", "/"),
+							  }),
 						"--spacing": `${spacing}px`,
 						"--float-duration": `${floatDuration}s`,
-						"--float-cycle-duration": `${cycleDuration}s`, // Cambiado para coincidir con el CSS
+						"--float-cycle-duration": `${cycleDuration}s`,
 						"--float-delay": `${floatDelay}s`,
 						"--slide-up-duration": `${slideUpDuration}s`,
 						"--slide-out-duration": `${slideOutDuration}s`,
-					}}ß
+					}}
 				>
 					{images.slice(0, 3).map((image, index) => {
 						const baseClassName = "cgb-floating-box";
