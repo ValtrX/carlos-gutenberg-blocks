@@ -333,6 +333,12 @@ function save({
     spacing = 20,
     automaticSizing = false
   } = attributes;
+
+  // Dividir las imágenes en grupos de 3
+  const imageGroups = [];
+  for (let i = 0; i < images.length; i += 3) {
+    imageGroups.push(images.slice(i, i + 3));
+  }
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
     ..._wordpress_block_editor__WEBPACK_IMPORTED_MODULE_0__.useBlockProps.save(),
     "data-float-duration": floatDuration,
@@ -343,15 +349,15 @@ function save({
     "data-spacing": spacing,
     style: {
       minHeight: automaticSizing ? "300px" : "auto"
-    } // Añadido para dar altura mínima
-    ,
+    },
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "cgb-floating-boxes-frontend",
       style: {
         height: "100%"
       },
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        className: `cgb-group ${automaticSizing ? "automatic-sizing" : ""}`,
+      children: imageGroups.map((group, groupIndex) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: `cgb-group ${automaticSizing ? "automatic-sizing" : ""} ${groupIndex === 0 ? 'active' : ''}`,
+        "data-group-index": groupIndex,
         style: {
           ...(automaticSizing ? {
             aspectRatio: aspectRatio.replace(":", "/"),
@@ -375,7 +381,7 @@ function save({
           "--slide-up-duration": `${slideUpDuration}s`,
           "--slide-out-duration": `${slideOutDuration}s`
         },
-        children: images.slice(0, 3).map((image, index) => {
+        children: group.map((image, index) => {
           const baseClassName = "cgb-floating-box";
           const positionClassName = index === 1 ? "cgb-second" : index === 2 ? "cgb-third" : "";
           const alignmentClassName = alignRight ? "align-right" : "align-left";
@@ -385,11 +391,11 @@ function save({
             "aria-label": `Floating box ${index + 1}`,
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("img", {
               src: image.url,
-              alt: `Imagen ${index + 1}`
+              alt: `Imagen ${groupIndex * 3 + index + 1}`
             })
           }, index);
         })
-      })
+      }, groupIndex))
     })
   });
 }

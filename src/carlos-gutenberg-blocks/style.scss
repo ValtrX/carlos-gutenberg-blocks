@@ -14,11 +14,21 @@
 	align-items: center;
 
 	.cgb-group {
-		position: relative;
+		position: absolute; // Cambiar de 'relative' a 'absolute'
 		margin: 0 auto;
-		aspect-ratio: var(--aspect-ratio, 1/1);
+		left: 0;
+		right: 0;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 0.3s ease-out;
 
 		// Modo automatic sizing
+
+		&.active {
+			opacity: 1;
+			visibility: visible;
+	}
+	
 		&.automatic-sizing {
 			width: 100%;
 			height: calc(

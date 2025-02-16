@@ -15,9 +15,17 @@
   align-items: center;
 }
 .cgb-floating-boxes-frontend .cgb-group {
-  position: relative;
+  position: absolute;
   margin: 0 auto;
-  aspect-ratio: var(--aspect-ratio, 1/1);
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out;
+}
+.cgb-floating-boxes-frontend .cgb-group.active {
+  opacity: 1;
+  visibility: visible;
 }
 .cgb-floating-boxes-frontend .cgb-group.automatic-sizing {
   width: 100%;
