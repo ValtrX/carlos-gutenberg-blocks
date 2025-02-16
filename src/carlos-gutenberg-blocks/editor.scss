@@ -1,86 +1,80 @@
 .cgb-floating-boxes-editor {
   border: 1px dotted #f00;
   padding: 20px;
+  width: 100%;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .cgb-group {
-    position: relative;
-    width: min(300px, 80%);
-    margin: 0 auto;
-    min-height: 300px;
-    aspect-ratio: var(--aspect-ratio, 1/1);
-  }
+      position: relative;
+      margin: 0 auto;
+      height: 300px;
+      width: auto; // El ancho se ajustará según el aspect ratio
+      aspect-ratio: var(--aspect-ratio, 1/1);
+      max-width: 100%; // Para asegurar que no desborde
 
-  .image-preview-panel {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-    margin-top: 10px;
-    
-    img {
-      width: 50px;
-      height: 50px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      object-fit: cover;
-    }
+      // Removemos los estilos específicos de automatic/no-automatic
+      // ya que en el editor siempre queremos que se ajuste al contenedor
   }
 
   .cgb-floating-box {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 3;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    top: 0; // Posición inicial para todas las cajas
+      position: absolute;
+      width: 75%;
+      height: 75%;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      top: 0;
 
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+      img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+      }
 
-    // Alineación base
-    &.align-right {
-      left: 0;
-      right: auto;
-    }
-
-    &.align-left {
-      right: 0;
-      left: auto;
-    }
-
-    // Segunda caja
-    &.cgb-second {
-      top: 10px;
-      z-index: 2;
-
+      // Alineación base
       &.align-right {
-        left: 10px;
+          left: 0;
+          right: auto;
       }
 
       &.align-left {
-        right: 10px;
-      }
-    }
-
-    // Tercera caja
-    &.cgb-third {
-      top: 20px;
-      z-index: 1;
-
-      &.align-right {
-        left: 20px;
+          right: 0;
+          left: auto;
       }
 
-      &.align-left {
-        right: 20px;
+      // Segunda caja
+      &.cgb-second {
+          top: var(--spacing, 20px);
+          z-index: 2;
+
+          &.align-right {
+              left: var(--spacing, 20px);
+          }
+
+          &.align-left {
+              right: var(--spacing, 20px);
+          }
       }
-    }
+
+      // Tercera caja
+      &.cgb-third {
+          top: calc(var(--spacing, 20px) * 2);
+          z-index: 1;
+
+          &.align-right {
+              left: calc(var(--spacing, 20px) * 2);
+          }
+
+          &.align-left {
+              right: calc(var(--spacing, 20px) * 2);
+          }
+      }
   }
 }

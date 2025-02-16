@@ -14,155 +14,198 @@
 	align-items: center;
 
 	.cgb-group {
-			position: relative;
-			margin: 0 auto;
+		position: relative;
+		margin: 0 auto;
+		aspect-ratio: var(--aspect-ratio, 1/1);
 
-			// Cuando NO está en automatic sizing
-			width: var(--box-size, 30vw);
-			aspect-ratio: var(--aspect-ratio, 1/1);
+		// Modo automatic sizing
+		&.automatic-sizing {
+			width: 100%;
+			height: calc(
+				100% * var(--aspect-ratio-height) / var(--aspect-ratio-width)
+			);
+			max-width: 600px;
 
-			&.automatic-sizing {
-					width: 100%;
-					height: 100%;
-					
-					.cgb-floating-box {
-							width: 90%;
-							height: 90%;
-					}
+			.cgb-floating-box {
+				width: 90%;
+				height: 90%;
+
+				@media (max-width: 768px) {
+					width: 80%;
+					height: 80%;
+				}
 			}
+		}
+
+		// Modo tamaño fijo
+		&:not(.automatic-sizing) {
+			width: var(--box-size);
+			height: calc(
+				var(--box-size) * var(--aspect-ratio-height) / var(--aspect-ratio-width)
+			);
 
 			@media (max-width: 768px) {
-					width: var(--mobile-box-size, 80vw);
-
-					&.automatic-sizing {
-							width: 100%;
-							height: 100%;
-							
-							.cgb-floating-box {
-									width: 80%;
-									height: 80%;
-							}
-					}
+				width: var(--mobile-box-size);
+				height: calc(
+					var(--mobile-box-size) * var(--aspect-ratio-height) /
+						var(--aspect-ratio-width)
+				);
 			}
+		}
 	}
 
 	.cgb-floating-box {
-			position: absolute;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 20px;
+		overflow: hidden;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		z-index: 3;
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		opacity: 0;
+		visibility: hidden;
+		top: 0;
+
+		img {
 			width: 100%;
 			height: 100%;
-			border-radius: 20px;
-			overflow: hidden;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			z-index: 3;
-			box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-			opacity: 0;
-			visibility: hidden;
-			top: 0;
+			object-fit: cover;
+		}
 
-			img {
-					width: 100%;
-					height: 100%;
-					object-fit: cover;
-			}
+		// Alineación base
+		&.align-right {
+			left: 0;
+			right: unset;
+		}
 
-			// Alineación base
+		&.align-left {
+			left: unset;
+			right: 0;
+		}
+
+		// Segunda caja
+		&.cgb-second {
+			top: var(--spacing, 20px);
+			z-index: 2;
+
 			&.align-right {
-					left: 0;
-					right: unset;
+				left: var(--spacing, 20px);
 			}
 
 			&.align-left {
-					left: unset;
-					right: 0;
+				right: var(--spacing, 20px);
+			}
+		}
+
+		// Tercera caja
+		&.cgb-third {
+			top: calc(var(--spacing, 20px) * 2);
+			z-index: 1;
+
+			&.align-right {
+				left: calc(var(--spacing, 20px) * 2);
 			}
 
-			// Segunda caja
-			&.cgb-second {
-					top: var(--spacing, 20px);
-					z-index: 2;
-
-					&.align-right {
-							left: var(--spacing, 20px);
-					}
-
-					&.align-left {
-							right: var(--spacing, 20px);
-					}
+			&.align-left {
+				right: calc(var(--spacing, 20px) * 2);
 			}
+		}
 
-			// Tercera caja
-			&.cgb-third {
-					top: calc(var(--spacing, 20px) * 2);
-					z-index: 1;
+		// Animaciones
+		&.animate {
+			animation:
+				slideUp var(--slide-up-duration) ease-in-out forwards,
+				float var(--float-cycle-duration) linear
+					calc(var(--slide-up-duration) + var(--float-delay)) infinite,
+				slideUpOut var(--slide-up-out-duration) ease-in-out
+					calc(
+						var(--slide-up-duration) + var(--float-duration) +
+							var(--float-delay)
+					)
+					forwards;
+		}
 
-					&.align-right {
-							left: calc(var(--spacing, 20px) * 2);
-					}
+		&.cgb-second.animate {
+			animation:
+				slideUp calc(var(--slide-up-duration) * 1.4) ease-in-out 0.4s forwards,
+				float var(--float-cycle-duration) linear
+					calc(var(--slide-up-duration) * 1.4 + var(--float-delay)) infinite,
+				slideUpOut var(--slide-up-out-duration) ease-in-out
+					calc(
+						var(--slide-up-duration) * 1.4 + var(--float-duration) +
+							var(--float-delay)
+					)
+					forwards;
+		}
 
-					&.align-left {
-							right: calc(var(--spacing, 20px) * 2);
-					}
-			}
-
-			// Animaciones
-			&.animate {
-					animation: 
-							slideUp var(--slide-up-duration) ease-in-out forwards,
-							float var(--float-cycle-duration) linear calc(var(--slide-up-duration) + var(--float-delay)) infinite,
-							slideUpOut var(--slide-up-out-duration) ease-in-out calc(var(--slide-up-duration) + var(--float-duration) + var(--float-delay)) forwards;
-			}
-
-			&.cgb-second.animate {
-					animation: 
-							slideUp calc(var(--slide-up-duration) * 1.4) ease-in-out 0.4s forwards,
-							float var(--float-cycle-duration) linear calc(var(--slide-up-duration) * 1.4 + var(--float-delay)) infinite,
-							slideUpOut var(--slide-up-out-duration) ease-in-out calc(var(--slide-up-duration) * 1.4 + var(--float-duration) + var(--float-delay)) forwards;
-			}
-
-			&.cgb-third.animate {
-					animation: 
-							slideUp calc(var(--slide-up-duration) * 1.8) ease-in-out 0.8s forwards,
-							float var(--float-cycle-duration) linear calc(var(--slide-up-duration) * 1.8 + var(--float-delay)) infinite,
-							slideUpOut var(--slide-up-out-duration) ease-in-out calc(var(--slide-up-duration) * 1.8 + var(--float-duration) + var(--float-delay)) forwards;
-			}
+		&.cgb-third.animate {
+			animation:
+				slideUp calc(var(--slide-up-duration) * 1.8) ease-in-out 0.8s forwards,
+				float var(--float-cycle-duration) linear
+					calc(var(--slide-up-duration) * 1.8 + var(--float-delay)) infinite,
+				slideUpOut var(--slide-up-out-duration) ease-in-out
+					calc(
+						var(--slide-up-duration) * 1.8 + var(--float-duration) +
+							var(--float-delay)
+					)
+					forwards;
+		}
 	}
 
 	@keyframes slideUp {
-			0% { 
-					transform: translateY(150%); 
-					opacity: 0; 
-					visibility: visible; 
-			}
-			100% { 
-					transform: translateY(0); 
-					opacity: 1; 
-					visibility: visible; 
-			}
+		0% {
+			transform: translateY(150%);
+			opacity: 0;
+			visibility: visible;
+		}
+		100% {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+		}
 	}
 
 	@keyframes float {
-			0%, 25% { transform: translateY(0); }
-			12.5% { transform: translateY(-10px); }
-			37.5% { transform: translateY(10px); }
-			50% { transform: translateY(0); }
-			62.5% { transform: translateY(-15px); }
-			75% { transform: translateY(0); }
-			87.5% { transform: translateY(15px); }
-			100% { transform: translateY(0); }
+		0%,
+		25% {
+			transform: translateY(0);
+		}
+		12.5% {
+			transform: translateY(-10px);
+		}
+		37.5% {
+			transform: translateY(10px);
+		}
+		50% {
+			transform: translateY(0);
+		}
+		62.5% {
+			transform: translateY(-15px);
+		}
+		75% {
+			transform: translateY(0);
+		}
+		87.5% {
+			transform: translateY(15px);
+		}
+		100% {
+			transform: translateY(0);
+		}
 	}
 
 	@keyframes slideUpOut {
-			0% { 
-					transform: translateY(0); 
-					opacity: 1; 
-					visibility: visible; 
-			}
-			100% { 
-					transform: translateY(-150%); 
-					opacity: 0; 
-					visibility: hidden; 
-			}
+		0% {
+			transform: translateY(0);
+			opacity: 1;
+			visibility: visible;
+		}
+		100% {
+			transform: translateY(-150%);
+			opacity: 0;
+			visibility: hidden;
+		}
 	}
 }

@@ -25,26 +25,37 @@ export default function save({ attributes }) {
 			data-slide-up-duration={slideUpDuration}
 			data-slide-out-duration={slideOutDuration}
 			data-spacing={spacing}
-			data-automatic-sizing={automaticSizing}
+			style={{ minHeight: automaticSizing ? "300px" : "auto" }} // Añadido para dar altura mínima
 		>
-			<div className="cgb-floating-boxes-frontend">
+			<div className="cgb-floating-boxes-frontend" style={{ height: "100%" }}>
 				<div
 					className={`cgb-group ${automaticSizing ? "automatic-sizing" : ""}`}
 					style={{
-						...(automaticSizing
-							? { width: "100%" }
-							: {
+						...(automaticSizing ? 
+							{
+									aspectRatio: aspectRatio.replace(":", "/"),
+									"--aspect-ratio": aspectRatio.replace(":", "/"),
+									"--aspect-ratio-width": aspectRatio.split(":")[0],
+									"--aspect-ratio-height": aspectRatio.split(":")[1],
+									width: "100%",
+									height: "100%",
+							} : 
+							{
 									"--box-size": `${boxSize}vw`,
 									"--mobile-box-size": `${mobileBoxSize}vw`,
 									"--aspect-ratio": aspectRatio.replace(":", "/"),
-							  }),
-						"--spacing": `${spacing}px`,
-						"--float-duration": `${floatDuration}s`,
-						"--float-cycle-duration": `${cycleDuration}s`,
-						"--float-delay": `${floatDelay}s`,
-						"--slide-up-duration": `${slideUpDuration}s`,
-						"--slide-out-duration": `${slideOutDuration}s`,
-					}}
+									"--aspect-ratio-width": aspectRatio.split(":")[0],
+									"--aspect-ratio-height": aspectRatio.split(":")[1],
+									aspectRatio: aspectRatio.replace(":", "/"),
+							}
+					),
+					"--spacing": `${spacing}px`,
+					"--float-duration": `${floatDuration}s`,
+					"--float-cycle-duration": `${cycleDuration}s`,
+					"--float-delay": `${floatDelay}s`,
+					"--slide-up-duration": `${slideUpDuration}s`,
+					"--slide-out-duration": `${slideOutDuration}s`,
+			}}
 				>
 					{images.slice(0, 3).map((image, index) => {
 						const baseClassName = "cgb-floating-box";

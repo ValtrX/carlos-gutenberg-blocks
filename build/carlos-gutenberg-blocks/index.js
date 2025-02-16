@@ -52,7 +52,8 @@ function Edit({
     floatDelay = 2,
     slideUpDuration = 1,
     slideOutDuration = 1,
-    spacing = 20
+    spacing = 20,
+    automaticSizing = false
   } = attributes;
   const onSelectImages = newImages => {
     setAttributes({
@@ -68,13 +69,13 @@ function Edit({
         title: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Images Settings", "carlos-gutenberg-blocks"),
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
           label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Automatic Sizing", "carlos-gutenberg-blocks"),
-          checked: attributes.automaticSizing,
+          checked: automaticSizing,
           onChange: () => setAttributes({
-            automaticSizing: !attributes.automaticSizing
+            automaticSizing: !automaticSizing
           }),
           help: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Adjust boxes to fit parent container", "carlos-gutenberg-blocks"),
           __nextHasNoMarginBottom: true
-        }), !attributes.automaticSizing && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        }), !automaticSizing && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
             label: (0,_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__.__)("Desktop Size", "carlos-gutenberg-blocks"),
             value: boxSize,
@@ -216,10 +217,11 @@ function Edit({
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: "cgb-floating-boxes-editor",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
-          className: "cgb-group",
+          className: `cgb-group ${automaticSizing ? 'automatic-sizing' : ''}`,
           style: {
-            aspectRatio: aspectRatio.replace(":", "/"),
-            "--spacing": `${spacing}px`
+            "--aspect-ratio": aspectRatio.replace(":", "/"),
+            "--spacing": `${spacing}px`,
+            aspectRatio: aspectRatio.replace(":", "/")
           },
           children: images.slice(0, 3).map((image, index) => {
             const baseClassName = "cgb-floating-box";
@@ -339,18 +341,32 @@ function save({
     "data-slide-up-duration": slideUpDuration,
     "data-slide-out-duration": slideOutDuration,
     "data-spacing": spacing,
-    "data-automatic-sizing": automaticSizing,
+    style: {
+      minHeight: automaticSizing ? "300px" : "auto"
+    } // Añadido para dar altura mínima
+    ,
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
       className: "cgb-floating-boxes-frontend",
+      style: {
+        height: "100%"
+      },
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
         className: `cgb-group ${automaticSizing ? "automatic-sizing" : ""}`,
         style: {
           ...(automaticSizing ? {
-            width: "100%"
+            aspectRatio: aspectRatio.replace(":", "/"),
+            "--aspect-ratio": aspectRatio.replace(":", "/"),
+            "--aspect-ratio-width": aspectRatio.split(":")[0],
+            "--aspect-ratio-height": aspectRatio.split(":")[1],
+            width: "100%",
+            height: "100%"
           } : {
             "--box-size": `${boxSize}vw`,
             "--mobile-box-size": `${mobileBoxSize}vw`,
-            "--aspect-ratio": aspectRatio.replace(":", "/")
+            "--aspect-ratio": aspectRatio.replace(":", "/"),
+            "--aspect-ratio-width": aspectRatio.split(":")[0],
+            "--aspect-ratio-height": aspectRatio.split(":")[1],
+            aspectRatio: aspectRatio.replace(":", "/")
           }),
           "--spacing": `${spacing}px`,
           "--float-duration": `${floatDuration}s`,
