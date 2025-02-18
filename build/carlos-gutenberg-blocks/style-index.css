@@ -1,58 +1,70 @@
 /*!***************************************************************************************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/carlos-gutenberg-blocks/style.scss ***!
   \***************************************************************************************************************************************************************************************************************************************************************/
-.cgb-floating-boxes-frontend {
+.wp-block-create-block-carlos-gutenberg-blocks {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  overflow: hidden;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out;
   --slide-up-duration: var(--slide-up-duration, 1s);
   --float-cycle-duration: var(--cycle-duration, 3s);
   --float-duration: var(--float-duration, 18s);
   --slide-up-out-duration: var(--slide-out-duration, 1s);
   --float-delay: var(--float-delay, 2s);
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
-.cgb-floating-boxes-frontend .cgb-group {
-  position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease-out;
-}
-.cgb-floating-boxes-frontend .cgb-group.active {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend.active {
   opacity: 1;
   visibility: visible;
 }
-.cgb-floating-boxes-frontend .cgb-group.automatic-sizing {
-  width: 100%;
-  height: calc(100% * var(--aspect-ratio-height) / var(--aspect-ratio-width));
-  max-width: 600px;
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-group {
+  position: relative;
+  margin: 0 auto;
 }
-.cgb-floating-boxes-frontend .cgb-group.automatic-sizing .cgb-floating-box {
-  width: 90%;
-  height: 90%;
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-group.automatic-sizing {
+  height: 100%;
+  width: auto;
+  position: relative;
+  margin: 0 auto;
+  min-height: 200px;
+  min-width: calc(200px * var(--aspect-ratio-width) / var(--aspect-ratio-height));
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-group.automatic-sizing[style*="--aspect-ratio: 1/1"] {
+  width: calc(min(300px, 100%) * 0.85);
+  height: calc(min(300px, 100%) * 0.85);
+  aspect-ratio: 1/1;
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-group.automatic-sizing:not([style*="--aspect-ratio: 1/1"]) {
+  height: 100%;
+  width: auto;
+  aspect-ratio: calc(var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5));
+  max-height: calc(min(100%, 100vh) * 0.85);
+  max-width: calc(min(100vh * var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5), 100% * var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5)) * 0.85);
+}
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-group:not(.automatic-sizing) {
+  width: min(var(--box-size), 90vw);
+  aspect-ratio: var(--aspect-ratio, 1/1);
 }
 @media (max-width: 768px) {
-  .cgb-floating-boxes-frontend .cgb-group.automatic-sizing .cgb-floating-box {
-    width: 80%;
-    height: 80%;
+  .wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-group:not(.automatic-sizing) {
+    width: min(var(--mobile-box-size), 90vw);
   }
 }
-.cgb-floating-boxes-frontend .cgb-group:not(.automatic-sizing) {
-  width: var(--box-size);
-  height: calc(var(--box-size) * var(--aspect-ratio-height) / var(--aspect-ratio-width));
-}
-@media (max-width: 768px) {
-  .cgb-floating-boxes-frontend .cgb-group:not(.automatic-sizing) {
-    width: var(--mobile-box-size);
-    height: calc(var(--mobile-box-size) * var(--aspect-ratio-height) / var(--aspect-ratio-width));
-  }
-}
-.cgb-floating-boxes-frontend .cgb-floating-box {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -67,47 +79,47 @@
   visibility: hidden;
   top: 0;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box img {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.align-right {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.align-right {
   left: 0;
   right: unset;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.align-left {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.align-left {
   left: unset;
   right: 0;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-second {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-second {
   top: var(--spacing, 20px);
   z-index: 2;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-second.align-right {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-second.align-right {
   left: var(--spacing, 20px);
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-second.align-left {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-second.align-left {
   right: var(--spacing, 20px);
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-third {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-third {
   top: calc(var(--spacing, 20px) * 2);
   z-index: 1;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-third.align-right {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-third.align-right {
   left: calc(var(--spacing, 20px) * 2);
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-third.align-left {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-third.align-left {
   right: calc(var(--spacing, 20px) * 2);
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.animate {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.animate {
   animation: slideUp var(--slide-up-duration) ease-in-out forwards, float var(--float-cycle-duration) linear calc(var(--slide-up-duration) + var(--float-delay)) infinite, slideUpOut var(--slide-up-out-duration) ease-in-out calc(var(--slide-up-duration) + var(--float-duration) + var(--float-delay)) forwards;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-second.animate {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-second.animate {
   animation: slideUp calc(var(--slide-up-duration) * 1.4) ease-in-out 0.4s forwards, float var(--float-cycle-duration) linear calc(var(--slide-up-duration) * 1.4 + var(--float-delay)) infinite, slideUpOut var(--slide-up-out-duration) ease-in-out calc(var(--slide-up-duration) * 1.4 + var(--float-duration) + var(--float-delay)) forwards;
 }
-.cgb-floating-boxes-frontend .cgb-floating-box.cgb-third.animate {
+.wp-block-create-block-carlos-gutenberg-blocks .cgb-floating-boxes-frontend .cgb-floating-box.cgb-third.animate {
   animation: slideUp calc(var(--slide-up-duration) * 1.8) ease-in-out 0.8s forwards, float var(--float-cycle-duration) linear calc(var(--slide-up-duration) * 1.8 + var(--float-delay)) infinite, slideUpOut var(--slide-up-out-duration) ease-in-out calc(var(--slide-up-duration) * 1.8 + var(--float-duration) + var(--float-delay)) forwards;
 }
 @keyframes slideUp {

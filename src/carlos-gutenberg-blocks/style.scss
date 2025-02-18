@@ -1,221 +1,233 @@
-.cgb-floating-boxes-frontend {
-	// Variables CSS para animaciones
-	--slide-up-duration: var(--slide-up-duration, 1s);
-	--float-cycle-duration: var(--cycle-duration, 3s);
-	--float-duration: var(--float-duration, 18s);
-	--slide-up-out-duration: var(--slide-out-duration, 1s);
-	--float-delay: var(--float-delay, 2s);
-
+.wp-block-create-block-carlos-gutenberg-blocks {
 	position: relative;
 	width: 100%;
 	height: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+	min-height: 300px;
+	overflow: hidden;
 
-	.cgb-group {
-		position: absolute; // Cambiar de 'relative' a 'absolute'
-		margin: 0 auto;
-		left: 0;
-		right: 0;
-		opacity: 0;
-		visibility: hidden;
-		transition: opacity 0.3s ease-out;
-
-		// Modo automatic sizing
-
-		&.active {
-			opacity: 1;
-			visibility: visible;
-	}
-	
-		&.automatic-sizing {
-			width: 100%;
-			height: calc(
-				100% * var(--aspect-ratio-height) / var(--aspect-ratio-width)
-			);
-			max-width: 600px;
-
-			.cgb-floating-box {
-				width: 90%;
-				height: 90%;
-
-				@media (max-width: 768px) {
-					width: 80%;
-					height: 80%;
-				}
-			}
-		}
-
-		// Modo tamaño fijo
-		&:not(.automatic-sizing) {
-			width: var(--box-size);
-			height: calc(
-				var(--box-size) * var(--aspect-ratio-height) / var(--aspect-ratio-width)
-			);
-
-			@media (max-width: 768px) {
-				width: var(--mobile-box-size);
-				height: calc(
-					var(--mobile-box-size) * var(--aspect-ratio-height) /
-						var(--aspect-ratio-width)
-				);
-			}
-		}
-	}
-
-	.cgb-floating-box {
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		border-radius: 20px;
-		overflow: hidden;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		z-index: 3;
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-		opacity: 0;
-		visibility: hidden;
-		top: 0;
-
-		img {
+	.cgb-floating-boxes-frontend {
+			position: absolute;
+			top: 50%;
+			left: 50%;
 			width: 100%;
 			height: 100%;
-			object-fit: cover;
-		}
-
-		// Alineación base
-		&.align-right {
-			left: 0;
-			right: unset;
-		}
-
-		&.align-left {
-			left: unset;
-			right: 0;
-		}
-
-		// Segunda caja
-		&.cgb-second {
-			top: var(--spacing, 20px);
-			z-index: 2;
-
-			&.align-right {
-				left: var(--spacing, 20px);
-			}
-
-			&.align-left {
-				right: var(--spacing, 20px);
-			}
-		}
-
-		// Tercera caja
-		&.cgb-third {
-			top: calc(var(--spacing, 20px) * 2);
-			z-index: 1;
-
-			&.align-right {
-				left: calc(var(--spacing, 20px) * 2);
-			}
-
-			&.align-left {
-				right: calc(var(--spacing, 20px) * 2);
-			}
-		}
-
-		// Animaciones
-		&.animate {
-			animation:
-				slideUp var(--slide-up-duration) ease-in-out forwards,
-				float var(--float-cycle-duration) linear
-					calc(var(--slide-up-duration) + var(--float-delay)) infinite,
-				slideUpOut var(--slide-up-out-duration) ease-in-out
-					calc(
-						var(--slide-up-duration) + var(--float-duration) +
-							var(--float-delay)
-					)
-					forwards;
-		}
-
-		&.cgb-second.animate {
-			animation:
-				slideUp calc(var(--slide-up-duration) * 1.4) ease-in-out 0.4s forwards,
-				float var(--float-cycle-duration) linear
-					calc(var(--slide-up-duration) * 1.4 + var(--float-delay)) infinite,
-				slideUpOut var(--slide-up-out-duration) ease-in-out
-					calc(
-						var(--slide-up-duration) * 1.4 + var(--float-duration) +
-							var(--float-delay)
-					)
-					forwards;
-		}
-
-		&.cgb-third.animate {
-			animation:
-				slideUp calc(var(--slide-up-duration) * 1.8) ease-in-out 0.8s forwards,
-				float var(--float-cycle-duration) linear
-					calc(var(--slide-up-duration) * 1.8 + var(--float-delay)) infinite,
-				slideUpOut var(--slide-up-out-duration) ease-in-out
-					calc(
-						var(--slide-up-duration) * 1.8 + var(--float-duration) +
-							var(--float-delay)
-					)
-					forwards;
-		}
-	}
-
-	@keyframes slideUp {
-		0% {
-			transform: translateY(150%);
-			opacity: 0;
-			visibility: visible;
-		}
-		100% {
-			transform: translateY(0);
-			opacity: 1;
-			visibility: visible;
-		}
-	}
-
-	@keyframes float {
-		0%,
-		25% {
-			transform: translateY(0);
-		}
-		12.5% {
-			transform: translateY(-10px);
-		}
-		37.5% {
-			transform: translateY(10px);
-		}
-		50% {
-			transform: translateY(0);
-		}
-		62.5% {
-			transform: translateY(-15px);
-		}
-		75% {
-			transform: translateY(0);
-		}
-		87.5% {
-			transform: translateY(15px);
-		}
-		100% {
-			transform: translateY(0);
-		}
-	}
-
-	@keyframes slideUpOut {
-		0% {
-			transform: translateY(0);
-			opacity: 1;
-			visibility: visible;
-		}
-		100% {
-			transform: translateY(-150%);
+			transform: translate(-50%, -50%);
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			opacity: 0;
 			visibility: hidden;
-		}
+			transition: opacity 0.3s ease-out;
+
+			&.active {
+					opacity: 1;
+					visibility: visible;
+			}
+
+			// Variables CSS para animaciones
+			--slide-up-duration: var(--slide-up-duration, 1s);
+			--float-cycle-duration: var(--cycle-duration, 3s);
+			--float-duration: var(--float-duration, 18s);
+			--slide-up-out-duration: var(--slide-out-duration, 1s);
+			--float-delay: var(--float-delay, 2s);
+
+			.cgb-group {
+					position: relative;
+					margin: 0 auto;
+					
+					// Modo automatic sizing
+					&.automatic-sizing {
+						height: 100%;
+						width: auto;
+						position: relative;
+						margin: 0 auto;
+						
+						&[style*="--aspect-ratio: 1/1"] {
+							width: calc(min(300px, 100%) * 0.85); // Reduce al 85% del tamaño
+							height: calc(min(300px, 100%) * 0.85);
+							aspect-ratio: 1/1;
+					}
+	
+					&:not([style*="--aspect-ratio: 1/1"]) {
+							height: 100%;
+							width: auto;
+							aspect-ratio: calc(var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5));
+							max-height: calc(min(100%, 100vh) * 0.85); // Reduce al 85%
+							max-width: calc(min(
+									calc(100vh * var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5)),
+									calc(100% * var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5))
+							) * 0.85); // Reduce al 85%
+					}
+		
+						min-height: 200px;
+						min-width: calc(200px * var(--aspect-ratio-width) / var(--aspect-ratio-height));
+				}
+		
+
+					// Modo tamaño fijo
+					&:not(.automatic-sizing) {
+							width: min(var(--box-size), 90vw);
+							aspect-ratio: var(--aspect-ratio, 1/1);
+
+							@media (max-width: 768px) {
+									width: min(var(--mobile-box-size), 90vw);
+							}
+					}
+			}
+
+			.cgb-floating-box {
+					position: absolute;
+					width: 100%;
+					height: 100%;
+					border-radius: 20px;
+					overflow: hidden;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					z-index: 3;
+					box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+					opacity: 0;
+					visibility: hidden;
+					top: 0;
+
+					img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+					}
+
+					// Alineación base
+					&.align-right {
+							left: 0;
+							right: unset;
+					}
+
+					&.align-left {
+							left: unset;
+							right: 0;
+					}
+
+					// Segunda caja
+					&.cgb-second {
+							top: var(--spacing, 20px);
+							z-index: 2;
+
+							&.align-right {
+									left: var(--spacing, 20px);
+							}
+
+							&.align-left {
+									right: var(--spacing, 20px);
+							}
+					}
+
+					// Tercera caja
+					&.cgb-third {
+							top: calc(var(--spacing, 20px) * 2);
+							z-index: 1;
+
+							&.align-right {
+									left: calc(var(--spacing, 20px) * 2);
+							}
+
+							&.align-left {
+									right: calc(var(--spacing, 20px) * 2);
+							}
+					}
+
+					// Animaciones
+					&.animate {
+							animation:
+									slideUp var(--slide-up-duration) ease-in-out forwards,
+									float var(--float-cycle-duration) linear
+											calc(var(--slide-up-duration) + var(--float-delay)) infinite,
+									slideUpOut var(--slide-up-out-duration) ease-in-out
+											calc(
+													var(--slide-up-duration) + var(--float-duration) +
+															var(--float-delay)
+											)
+											forwards;
+					}
+
+					&.cgb-second.animate {
+							animation:
+									slideUp calc(var(--slide-up-duration) * 1.4) ease-in-out 0.4s forwards,
+									float var(--float-cycle-duration) linear
+											calc(var(--slide-up-duration) * 1.4 + var(--float-delay)) infinite,
+									slideUpOut var(--slide-up-out-duration) ease-in-out
+											calc(
+													var(--slide-up-duration) * 1.4 + var(--float-duration) +
+															var(--float-delay)
+											)
+											forwards;
+					}
+
+					&.cgb-third.animate {
+							animation:
+									slideUp calc(var(--slide-up-duration) * 1.8) ease-in-out 0.8s forwards,
+									float var(--float-cycle-duration) linear
+											calc(var(--slide-up-duration) * 1.8 + var(--float-delay)) infinite,
+									slideUpOut var(--slide-up-out-duration) ease-in-out
+											calc(
+													var(--slide-up-duration) * 1.8 + var(--float-duration) +
+															var(--float-delay)
+											)
+											forwards;
+					}
+			}
+
+			@keyframes slideUp {
+					0% {
+							transform: translateY(150%);
+							opacity: 0;
+							visibility: visible;
+					}
+					100% {
+							transform: translateY(0);
+							opacity: 1;
+							visibility: visible;
+					}
+			}
+
+			@keyframes float {
+					0%,
+					25% {
+							transform: translateY(0);
+					}
+					12.5% {
+							transform: translateY(-10px);
+					}
+					37.5% {
+							transform: translateY(10px);
+					}
+					50% {
+							transform: translateY(0);
+					}
+					62.5% {
+							transform: translateY(-15px);
+					}
+					75% {
+							transform: translateY(0);
+					}
+					87.5% {
+							transform: translateY(15px);
+					}
+					100% {
+							transform: translateY(0);
+					}
+			}
+
+			@keyframes slideUpOut {
+					0% {
+							transform: translateY(0);
+							opacity: 1;
+							visibility: visible;
+					}
+					100% {
+							transform: translateY(-150%);
+							opacity: 0;
+							visibility: hidden;
+					}
+			}
 	}
 }

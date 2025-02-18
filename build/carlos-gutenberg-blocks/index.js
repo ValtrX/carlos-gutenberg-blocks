@@ -63,6 +63,9 @@ function Edit({
       }))
     });
   };
+
+  // Calcular las proporciones del aspect ratio
+  const [width, height] = aspectRatio.split(':').map(Number);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
@@ -220,8 +223,14 @@ function Edit({
           className: `cgb-group ${automaticSizing ? 'automatic-sizing' : ''}`,
           style: {
             "--aspect-ratio": aspectRatio.replace(":", "/"),
+            "--aspect-ratio-width": width,
+            "--aspect-ratio-height": height,
             "--spacing": `${spacing}px`,
-            aspectRatio: aspectRatio.replace(":", "/")
+            "--float-duration": `${floatDuration}s`,
+            "--float-cycle-duration": `${cycleDuration}s`,
+            "--float-delay": `${floatDelay}s`,
+            "--slide-up-duration": `${slideUpDuration}s`,
+            "--slide-out-duration": `${slideOutDuration}s`
           },
           children: images.slice(0, 3).map((image, index) => {
             const baseClassName = "cgb-floating-box";
@@ -347,17 +356,11 @@ function save({
     "data-slide-up-duration": slideUpDuration,
     "data-slide-out-duration": slideOutDuration,
     "data-spacing": spacing,
-    style: {
-      minHeight: automaticSizing ? "300px" : "auto"
-    },
-    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-      className: "cgb-floating-boxes-frontend",
-      style: {
-        height: "100%"
-      },
-      children: imageGroups.map((group, groupIndex) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-        className: `cgb-group ${automaticSizing ? "automatic-sizing" : ""} ${groupIndex === 0 ? 'active' : ''}`,
-        "data-group-index": groupIndex,
+    children: imageGroups.map((group, groupIndex) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `cgb-floating-boxes-frontend ${groupIndex === 0 ? 'active' : ''}`,
+      "data-group-index": groupIndex,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: `cgb-group ${automaticSizing ? "automatic-sizing" : ""}`,
         style: {
           ...(automaticSizing ? {
             aspectRatio: aspectRatio.replace(":", "/"),
@@ -395,8 +398,8 @@ function save({
             })
           }, index);
         })
-      }, groupIndex))
-    })
+      })
+    }, groupIndex))
   });
 }
 

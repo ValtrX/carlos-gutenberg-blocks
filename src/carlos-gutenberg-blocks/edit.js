@@ -41,6 +41,9 @@ export default function Edit({ attributes, setAttributes }) {
         });
     };
 
+    // Calcular las proporciones del aspect ratio
+    const [width, height] = aspectRatio.split(':').map(Number);
+
     return (
         <>
             <InspectorControls>
@@ -194,8 +197,14 @@ export default function Edit({ attributes, setAttributes }) {
                         className={`cgb-group ${automaticSizing ? 'automatic-sizing' : ''}`}
                         style={{
                             "--aspect-ratio": aspectRatio.replace(":", "/"),
+                            "--aspect-ratio-width": width,
+                            "--aspect-ratio-height": height,
                             "--spacing": `${spacing}px`,
-                            aspectRatio: aspectRatio.replace(":", "/"),
+                            "--float-duration": `${floatDuration}s`,
+                            "--float-cycle-duration": `${cycleDuration}s`,
+                            "--float-delay": `${floatDelay}s`,
+                            "--slide-up-duration": `${slideUpDuration}s`,
+                            "--slide-out-duration": `${slideOutDuration}s`,
                         }}
                     >
                         {images.slice(0, 3).map((image, index) => {

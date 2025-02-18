@@ -31,14 +31,15 @@ export default function save({ attributes }) {
             data-slide-up-duration={slideUpDuration}
             data-slide-out-duration={slideOutDuration}
             data-spacing={spacing}
-            style={{ minHeight: automaticSizing ? "300px" : "auto" }}
         >
-            <div className="cgb-floating-boxes-frontend" style={{ height: "100%" }}>
-                {imageGroups.map((group, groupIndex) => (
+            {imageGroups.map((group, groupIndex) => (
+                <div 
+                    key={groupIndex}
+                    className={`cgb-floating-boxes-frontend ${groupIndex === 0 ? 'active' : ''}`}
+                    data-group-index={groupIndex}
+                >
                     <div
-                        key={groupIndex}
-                        className={`cgb-group ${automaticSizing ? "automatic-sizing" : ""} ${groupIndex === 0 ? 'active' : ''}`}
-                        data-group-index={groupIndex}
+                        className={`cgb-group ${automaticSizing ? "automatic-sizing" : ""}`}
                         style={{
                             ...(automaticSizing ? 
                                 {
@@ -86,8 +87,8 @@ export default function save({ attributes }) {
                             );
                         })}
                     </div>
-                ))}
-            </div>
+                </div>
+            ))}
         </div>
     );
 }
