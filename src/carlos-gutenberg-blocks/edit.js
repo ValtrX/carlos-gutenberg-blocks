@@ -14,7 +14,7 @@ import {
 
 const ASPECT_RATIOS = [
     { label: "9:16 (Vertical)", value: "9:16" },
-    { label: "1:1 (Cuadrado)", value: "1:1" },
+    { label: "1:1 (Square)", value: "1:1" },
     { label: "4:3 (Horizontal)", value: "4:3" },
     { label: "4:5 (Vertical)", value: "4:5" },
 ];
@@ -26,11 +26,11 @@ export default function Edit({ attributes, setAttributes }) {
         boxSize = 30,
         mobileBoxSize = 80,
         aspectRatio = "1:1",
-        floatDuration = 18,
+        floatDuration = 8,
         cycleDuration = 3,
-        floatDelay = 2,
-        slideUpDuration = 1,
-        slideOutDuration = 1,
+        floatDelay = 1,
+        slideUpDuration =0.8,
+        slideOutDuration = 0.8,
         spacing = 20,
         automaticSizing = false,
     } = attributes;
@@ -41,7 +41,7 @@ export default function Edit({ attributes, setAttributes }) {
         });
     };
 
-    // Calcular las proporciones del aspect ratio
+    // Calculo las proporciones del aspect ratio
     const [width, height] = aspectRatio.split(':').map(Number);
 
     return (
@@ -58,7 +58,7 @@ export default function Edit({ attributes, setAttributes }) {
                     {!automaticSizing && (
                         <>
                             <RangeControl
-                                label={__("Desktop Size", "carlos-gutenberg-blocks")}
+                                label={__("Desktop Size (vw)", "carlos-gutenberg-blocks")}
                                 value={boxSize}
                                 onChange={(value) => setAttributes({ boxSize: value })}
                                 min={10}
@@ -67,7 +67,7 @@ export default function Edit({ attributes, setAttributes }) {
                                 __nextHasNoMarginBottom
                             />
                             <RangeControl
-                                label={__("Mobile Size", "carlos-gutenberg-blocks")}
+                                label={__("Mobile Size (vw)", "carlos-gutenberg-blocks")}
                                 value={mobileBoxSize}
                                 onChange={(value) => setAttributes({ mobileBoxSize: value })}
                                 min={30}
@@ -142,7 +142,7 @@ export default function Edit({ attributes, setAttributes }) {
                         onChange={(value) => setAttributes({ floatDuration: value })}
                         min={5}
                         max={30}
-                        initialPosition={18}
+                        initialPosition={8}
                         help={__("How long the boxes will float before sliding out", "carlos-gutenberg-blocks")}
                         __nextHasNoMarginBottom
                     />
@@ -173,7 +173,7 @@ export default function Edit({ attributes, setAttributes }) {
                         min={0.5}
                         max={3}
                         step={0.1}
-                        initialPosition={1}
+                        initialPosition={0.8}
                         help={__("How fast the boxes slide in", "carlos-gutenberg-blocks")}
                         __nextHasNoMarginBottom
                     />
@@ -184,7 +184,7 @@ export default function Edit({ attributes, setAttributes }) {
                         min={0.5}
                         max={3}
                         step={0.1}
-                        initialPosition={1}
+                        initialPosition={0.8}
                         help={__("How fast the boxes slide out", "carlos-gutenberg-blocks")}
                         __nextHasNoMarginBottom
                     />
@@ -192,39 +192,61 @@ export default function Edit({ attributes, setAttributes }) {
             </InspectorControls>
 
             <div {...useBlockProps()}>
-                <div className="cgb-floating-boxes-editor">
-                    <div
-                        className={`cgb-group ${automaticSizing ? 'automatic-sizing' : ''}`}
-                        style={{
-                            "--aspect-ratio": aspectRatio.replace(":", "/"),
-                            "--aspect-ratio-width": width,
-                            "--aspect-ratio-height": height,
-                            "--spacing": `${spacing}px`,
-                            "--float-duration": `${floatDuration}s`,
-                            "--float-cycle-duration": `${cycleDuration}s`,
-                            "--float-delay": `${floatDelay}s`,
-                            "--slide-up-duration": `${slideUpDuration}s`,
-                            "--slide-out-duration": `${slideOutDuration}s`,
-                        }}
-                    >
-                        {images.slice(0, 3).map((image, index) => {
-                            const baseClassName = "cgb-floating-box";
-                            const positionClassName =
-                                index === 1 ? "cgb-second" : index === 2 ? "cgb-third" : "";
-                            const alignmentClassName = alignRight
-                                ? "align-right"
-                                : "align-left";
-                            const className = `${baseClassName} ${positionClassName} ${alignmentClassName}`;
-
-                            return (
-                                <div key={index} className={className}>
-                                    <img src={image.url} alt={`Imagen ${index + 1}`} />
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
+    <div className="cgb-floating-boxes-editor">
+        {images.length === 0 ? (
+            <div className="cgb-empty-state">
+                <p>{__("Please add images to make this block work.", "carlos-gutenberg-blocks")}</p>
+                <MediaUpload
+                    onSelect={onSelectImages}
+                    allowedTypes={["image"]}
+                    multiple
+                    gallery
+                    value={images.map((image) => image.id)}
+                    render={({ open }) => (
+                        <Button 
+                            onClick={open} 
+                            variant="primary"
+                            className="cgb-add-images-button"
+                        >
+                            {__("Add Images", "carlos-gutenberg-blocks")}
+                        </Button>
+                    )}
+                />
             </div>
+        ) : (
+            <div
+                className={`cgb-group ${automaticSizing ? 'automatic-sizing' : ''}`}
+                style={{
+                    "--aspect-ratio": aspectRatio.replace(":", "/"),
+                    "--aspect-ratio-width": width,
+                    "--aspect-ratio-height": height,
+                    "--spacing": `${spacing}px`,
+                    "--float-duration": `${floatDuration}s`,
+                    "--float-cycle-duration": `${cycleDuration}s`,
+                    "--float-delay": `${floatDelay}s`,
+                    "--slide-up-duration": `${slideUpDuration}s`,
+                    "--slide-out-duration": `${slideOutDuration}s`,
+                }}
+            >
+                {images.slice(0, 3).map((image, index) => {
+                    const baseClassName = "cgb-floating-box";
+                    const positionClassName =
+                        index === 1 ? "cgb-second" : index === 2 ? "cgb-third" : "";
+                    const alignmentClassName = alignRight
+                        ? "align-right"
+                        : "align-left";
+                    const className = `${baseClassName} ${positionClassName} ${alignmentClassName}`;
+
+                    return (
+                        <div key={index} className={className}>
+                            <img src={image.url} alt={`Imagen ${index + 1}`} />
+                        </div>
+                    );
+                })}
+            </div>
+        )}
+    </div>
+</div>
         </>
     );
 }

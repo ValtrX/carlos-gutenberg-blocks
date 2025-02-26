@@ -2,12 +2,33 @@
   "$schema": "https://schemas.wp.org/trunk/block.json",
   "apiVersion": 3,
   "name": "create-block/carlos-gutenberg-blocks",
-  "version": "0.1.0",
-  "title": "Carlos Gutenberg Blocks",
+  "version": "1.0.0",
+  "title": "Carlos Gutenberg Blocks - Images Slider",
   "category": "widgets",
-  "icon": "smiley",
-  "description": "Example block scaffolded with Create Block tool.",
-  "example": {},
+  "icon": "images-alt",
+  "description": "Floating images slider with timing, animations and responsiveness that can be controlled in Gutenberg.",
+  "example": {
+    "attributes": {
+      "images": [
+        {
+          "id": 1,
+          "url": "https://picsum.photos/300/300"
+        },
+        {
+          "id": 2,
+          "url": "https://picsum.photos/300/300"
+        },
+        {
+          "id": 3,
+          "url": "https://picsum.photos/300/300"
+        }
+      ],
+      "automaticSizing": true,
+      "aspectRatio": "1:1",
+      "spacing": 20,
+      "alignRight": false
+    }
+  },
   "supports": {
     "html": false,
     "align": [
@@ -17,7 +38,9 @@
     "spacing": {
       "margin": true,
       "padding": true
-    }
+    },
+    "customClassName": true,
+    "reusable": false
   },
   "attributes": {
     "images": {

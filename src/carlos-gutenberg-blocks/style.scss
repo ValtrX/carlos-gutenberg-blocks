@@ -37,32 +37,22 @@
 					
 					// Modo automatic sizing
 					&.automatic-sizing {
-						height: 100%;
-						width: auto;
-						position: relative;
-						margin: 0 auto;
-						
-						&[style*="--aspect-ratio: 1/1"] {
-							width: calc(min(300px, 100%) * 0.85); // Reduce al 85% del tamaño
-							height: calc(min(300px, 100%) * 0.85);
-							aspect-ratio: 1/1;
+							--ratio-calc: calc(var(--aspect-ratio-width) / var(--aspect-ratio-height) * 1.5);
+							width: calc(min(
+									calc(100vh * var(--ratio-calc)),
+									calc(100% * var(--ratio-calc))
+							) * 0.85);
+							height: calc(min(100%, 100vh) * 0.85);
+							aspect-ratio: var(--aspect-ratio);
+							position: relative;
+							margin: 0 auto;
+
+							&[style*="--aspect-ratio: 1/1"] {
+									width: calc(min(300px, 100%) * 0.85);
+									height: calc(min(300px, 100%) * 0.85);
+									aspect-ratio: 1/1;
+							}
 					}
-	
-					&:not([style*="--aspect-ratio: 1/1"]) {
-							height: 100%;
-							width: auto;
-							aspect-ratio: calc(var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5));
-							max-height: calc(min(100%, 100vh) * 0.85); // Reduce al 85%
-							max-width: calc(min(
-									calc(100vh * var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5)),
-									calc(100% * var(--aspect-ratio-width) / (var(--aspect-ratio-height) * 1.5))
-							) * 0.85); // Reduce al 85%
-					}
-		
-						min-height: 200px;
-						min-width: calc(200px * var(--aspect-ratio-width) / var(--aspect-ratio-height));
-				}
-		
 
 					// Modo tamaño fijo
 					&:not(.automatic-sizing) {

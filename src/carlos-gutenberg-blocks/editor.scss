@@ -1,22 +1,40 @@
 .cgb-floating-boxes-editor {
-  border: 1px dotted #f00;
   padding: 20px;
   width: 100%;
   min-height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
+
+  .cgb-empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    padding: 20px;
+    text-align: center;
+    background: #f0f0f0;
+    border-radius: 8px;
+
+    p {
+        margin-bottom: 15px;
+        color: #666;
+    }
+
+    .cgb-add-images-button {
+        margin-top: 10px;
+    }
+}
 
   .cgb-group {
       position: relative;
       margin: 0 auto;
       height: 300px;
-      width: auto; // El ancho se ajustará según el aspect ratio
+      width: auto;
       aspect-ratio: var(--aspect-ratio, 1/1);
-      max-width: 100%; // Para asegurar que no desborde
-
-      // Removemos los estilos específicos de automatic/no-automatic
-      // ya que en el editor siempre queremos que se ajuste al contenedor
+      max-width: 100%;
   }
 
   .cgb-floating-box {
@@ -31,6 +49,7 @@
       z-index: 3;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       top: 0;
+      transform: translateY(5%);
 
       img {
           width: 100%;

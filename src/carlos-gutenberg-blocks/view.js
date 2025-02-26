@@ -23,18 +23,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         };
 
-        // Función para cambiar entre grupos
+        // Función para reiniciar o cambiar grupos
         const switchGroup = () => {
-            // Desactivar grupo actual
-            groups[currentGroupIndex].classList.remove('active');
-            
-            // Cambiar al siguiente grupo
-            currentGroupIndex = (currentGroupIndex + 1) % groups.length;
-            
-            // Activar nuevo grupo y animar
-            const newGroup = groups[currentGroupIndex];
-            newGroup.classList.add('active');
-            animateGroup(newGroup);
+            if (groups.length === 1) {
+                // Si hay solo un grupo, simplemente reiniciar la animación
+                animateGroup(groups[0]);
+            } else {
+                // Comportamiento existente para múltiples grupos
+                groups[currentGroupIndex].classList.remove('active');
+                currentGroupIndex = (currentGroupIndex + 1) % groups.length;
+                const newGroup = groups[currentGroupIndex];
+                newGroup.classList.add('active');
+                animateGroup(newGroup);
+            }
         };
 
         // Iniciar animaciones del primer grupo
@@ -54,9 +55,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const totalTime = totalAnimationTime * 1000;
 
-        // Cambiar grupos periódicamente si hay más de un grupo
-        if (groups.length > 1) {
-            setInterval(switchGroup, totalTime);
-        }
+        // Aplicar intervalo para todos los casos (1 o más grupos)
+        setInterval(switchGroup, totalTime);
     });
 });
