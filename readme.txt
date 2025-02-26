@@ -22,3 +22,6 @@ This Gutenberg block allows you to create an animated image slider with floating
 1. Download or clone this repository to your WordPress plugins directory
 2. Navigate to the plugin directory and unzip the contents
 3. Activate the plugin through the WordPress plugins page
+4. Search the Gutenberg block as "Carlos Gutenberg Blocks - Images Slider"
+5. Click "Add to Gutenberg" to add the block to your site
+6. Customize the block settings as desired
